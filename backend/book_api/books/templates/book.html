@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- dir="ltr": this template is specific for left to right text direction-->
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }} </title>
+    <meta name="author" content="{{ book.author }}"/>
+	<meta name="subject" content="{{ book.description }}"/>
+	<meta name="keywords" content="{{ book.category }}"/>
+    <style type='text/css'>
+
+    @page {
+        size: A4 portrait;
+        margin: 0pt;  padding: 0pt;
+        background-image: url('/media/{{ book.front_cover }}');
+
+    }
+
+    @page first_page {
+        size: A4 portrait;
+        margin: 70pt 60pt 70pt;
+        top: 150pt;
+    }
+
+    @page chapters {
+        size: A4 portrait;
+        margin: 70pt 60pt 70pt;
+
+        @frame header_frame { /* Static frame */
+            -pdf-frame-content: header_content;
+            left: 50pt;
+            width: 512pt;
+            top: 30pt;
+            height: 40pt;
+        }
+
+        @frame footer_frame { /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt;
+            width: 490pt;
+            top: 800pt;
+            height: 25pt;
+        }
+    }
+
+    h1.first_page {
+         font-family: 'Helvetica Neue', sans-serif;
+         font-size: 80px;
+         font-weight: bold;
+         text-align: center;
+         line-height: 1;
+         }
+
+    h2.first_page {
+        font-family: 'Open Sans',
+        sans-serif; font-size: 30px;
+        font-weight: 300;
+        line-height: 12px;
+        margin: 0 0 10px;
+        text-align: center;
+    }
+
+    p.first_page {
+          font-family: 'Helvetica Neue', sans-serif;
+          font-size: 18px;
+          line-height: 24px;
+          margin: 0 0 8px;
+          text-align: center;
+    }
+
+    h1.chapter {
+         font-family: 'Helvetica Neue', sans-serif;
+         font-size: 32px;
+         font-weight: bold;
+         text-align: left;
+         line-height: 1;
+         page-break-before: always;
+         }
+
+
+    p {
+          font-family: 'Helvetica Neue', sans-serif;
+          font-size: 18px;
+          line-height: 24px;
+          margin: 0 0 8px;
+           text-align: justify;
+           text-justify: inter-word;;
+    }
+
+    div.chapter_footer {
+          font-family: 'Helvetica Neue', sans-serif;
+          font-size: 12px;
+          border-top: .25pt solid #666;
+          padding-top: 8px;
+          text-align: center;
+    }
+
+    div.chapter_header {
+          font-family: 'Helvetica Neue', sans-serif;
+          font-size: 12px;
+          text-align: center;
+          font-weight: bold;
+    }
+
+    div.chapter_created {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 9px;
+        padding-top: 8px;
+        font-style: italic;
+        text-align: center;
+    }
+
+</style>
+</head>
+<body>
+     <div>
+         <!-- book cover -->
+     </div>
+
+    <pdf:nexttemplate name="first_page" />
+    <pdf:nextpage />
+
+     <!-- first page properties -->
+     <h1 class="first_page">{{ book.title }}</h1>
+     <h2 class="first_page">by {{ book.author }}</h2>
+     <p class="first_page">create at {{ book.date_created | date:"d/m/Y" }}</p>
+
+     <pdf:nexttemplate name="chapters" />
+
+   <!-- book header -->
+    <div id="header_content" class="chapter_header">{{ book.title }}</div>
+
+     <!-- book footer' -->
+    <div id="footer_content" class="chapter_footer">page <pdf:pagenumber>
+    of <pdf:pagecount>
+    </div>
+
+    <!-- chapter -->
+    {% for chapter in chapters %}
+        <h1 class="chapter">Chapter: {{ chapter.title }}</h1>
+        {% for paragraph in chapter.content_in_paragraph %}
+            <p>{{ paragraph }}</p>
+        {% endfor %}
+        <div class="chapter_created">
+            <p>Chapter created at {{ chapter.created | date:"d/m/Y" }}</p>
+        </div>
+    {% endfor %}
+
+</body>
+</html>

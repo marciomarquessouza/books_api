@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+ROOT_PATH = os.path.dirname(__file__)
+
+def rel(*path):
+    return os.path.abspath(
+        os.path.join(os.path.dirname(__file__), *path)
+    ).replace('\\', '/')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'books.apps.BooksConfig',
+    'easy_pdf',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +67,7 @@ ROOT_URLCONF = 'book_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [rel('tests', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,11 +134,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'djangobower.finders.BowerFinder',
+        )
+
+STATICFILES_DIRS = ( os.path.join('static'), )
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -141,3 +157,19 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000/'
 )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'xhtml2pdf': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        }
+    }
+}

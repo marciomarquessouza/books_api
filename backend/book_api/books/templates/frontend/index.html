@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Engineering challenge</title>
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'> -->
+	<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'books/css/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'books/css/icomoon.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'books/css/bootstrap.css' %}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'books/css/style.css' %}">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{% static 'books/css/owl.carousel.min.css' %}">
+	<lin	k rel="stylesheet" href="{% static 'books/css/owl.theme.default.min.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'books/js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{% static 'books/js/respond.min.js' %}"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+	
+	<header id="fh5co-header" style="background-image: url({% static 'books/images/hero_bg_1.jpg' %})">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row" style="margin-top: 5em;">
+				<div class="col-md-12 text-center">
+                    <img src="{% static 'books/images/logo_inkspired.png' %}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<div class="intro">
+						<h2>Web App created to complete the "Engineering challenge" sent by Inkspired team.</h2>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<figure class="fh5co-intro-img">
+						<img class="img-1 animate-box" src="{% static 'books/images/book_black.png' %}">
+						<img class="img-2 animate-box" src="{% static 'books/images/book_white.png' %}">
+					</figure>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="main">
+			
+		<div class="container">
+
+            {% for book in books %}
+			<div class="row fh5co-feature">
+				<div class="col-md-6 col-md-push-6">
+					<div class="fh5co-copy">
+						<div class="fh5co-copy-inner">
+							<h2> {{ book.title }}</h2>
+                            <h4> by {{ book.author }}</h4>
+							<p>{{ book.description }}</p>
+                            <p>
+							    <a href="{% url 'books:book_pdf' book.id %}" class="btn btn-primary btn-lg btn-hardbound">Book PDF</a>
+                                or &nbsp;&nbsp;</span> Print a Chapter:
+
+                                {% if book.chapters %}
+                                <ul>
+                                {% for chapter in book.chapters.all %}
+                                    <li>Chapter: {{ chapter.title }}: <a href="{% url 'books:chapter_pdf' chapter.id %}" class="btn-ebook"> (PDF)</a></li>
+                                {% endfor %}
+                                </ul>
+                                {% else %}
+                                    <p>No polls are available.</p>
+                                {% endif %}
+
+						    </p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-md-pull-6">
+					<div class="fh5co-img text-right">
+						<figure class="fh5co-figure animate-box">
+							<img class="img-2" src="/media/{{ book.front_cover }}">
+						</figure>
+					</div>
+				</div>
+			</div>
+			<!-- END feature -->
+
+            {% endfor %}
+		
+		</div>
+
+
+		<div class="fh5co-testimonial">
+			<div class="container">
+				<div class="row text-center fh5co-heading">
+					<h2>REST API</h2>
+				</div>
+				<div class="owl-carousel owl-carousel-fullwidth">
+					<div class="item">
+						<div class="testimony-slide active text-center">
+								<p>Also, you can access a Rest API using the Django Rest Framework:</p>
+                            <p><a href="{% url 'books:books' %}"> books </a> : <a href="{% url 'books:chapters' %}">chapters</a></p>
+                        </div>
+					</div>
+					<div >
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<footer id="footer">
+			<div class="container">
+				<div class="col-md-12 text-center">
+					<p class="copyright">
+						<small>2018 - Marcio Marques de Souza (mms.processos@gmail.com) </small>
+					</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="{% static 'books/js/jquery.min.js'%}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'books/js/jquery.easing.1.3.js'%}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'books/js/bootstrap.min.js'%}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'books/js/jquery.waypoints.min.js'%}"></script>
+	<!-- Carousel -->
+	<script src="{% static 'books/js/owl.carousel.min.js'%}"></script>
+
+	<!-- MAIN JS -->
+	<script src="{% static 'books/js/main.js'%}"></script>
+
+	</body>
+</html>
+

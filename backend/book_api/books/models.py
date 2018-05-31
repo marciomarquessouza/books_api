@@ -45,5 +45,10 @@ class Chapter (models.Model):
         unique_together = ('book', 'title')
         ordering = ['title']
 
+    def content_in_paragraph(self):
+        """ convert the content in paragraphs"""
+        paragraphs = self.content.split('\n')
+        return paragraphs
+
     def __str__(self):
         return self.title + ' (from: ' + self.book.title + ')'

@@ -27,6 +27,7 @@ class ChapterSerializer (serializers.ModelSerializer):
     class Meta:
         model = Chapter
         fields = (
+            'id',
             'title',
             'content',
             'created',
