@@ -157,19 +157,3 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000/'
 )
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'xhtml2pdf': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        }
-    }
-}
