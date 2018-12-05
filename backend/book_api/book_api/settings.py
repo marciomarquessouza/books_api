@@ -87,14 +87,21 @@ WSGI_APPLICATION = 'book_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ink_books_dev',
+#         'USER' : 'postgres',
+#         'PASSWORD' : 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'ink_books_dev',
-        'USER' : 'postgres',
-        'PASSWORD' : 'postgres',
-        'HOST': 'localhost',
-        'PORT': '',
     }
 }
 
