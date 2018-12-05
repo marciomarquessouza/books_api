@@ -9,7 +9,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Engineering challenge</title>
+	<title>Small Tales</title>
 
 	<!-- <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'> -->
 	<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
@@ -42,13 +42,13 @@
 		<div class="container">
 			<div class="row" style="margin-top: 5em;">
 				<div class="col-md-12 text-center">
-                    <img src="{% static 'books/images/logo_inkspired.png' %}">
+                    <img src="{% static 'books/images/logo_small_tales.png' %}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
 					<div class="intro">
-						<h2>Web App created to complete the "Engineering challenge" sent by Inkspired team.</h2>
+						<h2>Basic APP created using Django and API Rest.</h2>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6">
@@ -119,7 +119,10 @@
                         </div>
 					</div>
 					<div >
-
+						<div class="testimony-slide active text-center">
+								<p>All PDFs were dynamically created using the Python libraries</p>
+                            <p><a href="{% url 'books:books' %}"> books </a> : <a href="{% url 'books:chapters' %}">chapters</a></p>
+                        </div>
 					</div>
 
 				</div>
