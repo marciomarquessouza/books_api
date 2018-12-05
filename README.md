@@ -64,15 +64,15 @@ front-end temporary): http://127.0.0.1:8000/
 API
 
 Books
-(GET) List All Books: http://127.0.0.1:8000/book
-(POST) Create a new book: http://127.0.0.1:8000/book
-(GET) Book Detail: http://127.0.0.1:8000/${book_id}
-(PUT) Update a book information: http://127.0.0.1:8000/book/${book_id}
-(DELETE) delete a book: http://127.0.0.1:8000/book/${book_id}
+- (GET) List All Books: http://127.0.0.1:8000/book
+- (POST) Create a new book: http://127.0.0.1:8000/book
+- (GET) Book Detail: http://127.0.0.1:8000/${book_id}
+- (PUT) Update a book information: http://127.0.0.1:8000/book/${book_id}
+- (DELETE) delete a book: http://127.0.0.1:8000/book/${book_id}
 
 Chapters
-(GET) List All Chapters: http://127.0.0.1:8000/chapter
-(POST) Create a new chapter: http://127.0.0.1:8000/chapter
-(GET) Chapter Detail: http://127.0.0.1:8000/chapter/${book_id}
-(PUT) Update a chapter information: http://127.0.0.1:8000/chapter/${chapter_id}
-(DELETE) delete a chapter: http://127.0.0.1:8000/chapter/${chapter_id}
+- (GET) List All Chapters: http://127.0.0.1:8000/chapter
+- (POST) Create a new chapter: http://127.0.0.1:8000/chapter
+- (GET) Chapter Detail: http://127.0.0.1:8000/chapter/${book_id}
+- (PUT) Update a chapter information: http://127.0.0.1:8000/chapter/${chapter_id}
+- (DELETE) delete a chapter: http://127.0.0.1:8000/chapter/${chapter_id}
