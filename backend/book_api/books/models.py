@@ -23,7 +23,7 @@ class Book (models.Model):
         ordering = ['title']
 
     def __str__(self):
-        return self.title + ' (by: ' + self.author + ')'
+        return self.title + ' (by: ' + self.author + ')' if self.author else ''
 
 
 class Chapter (models.Model):
@@ -47,8 +47,10 @@ class Chapter (models.Model):
 
     def content_in_paragraph(self):
         """ convert the content in paragraphs"""
+        if not self.content:
+            return []
         paragraphs = self.content.split('\n')
         return paragraphs
 
     def __str__(self):
-        return self.title + ' (from: ' + self.book.title + ')'
+        return self.title + ' (from: ' + self.book.title + ')' if self.book.title else ''
