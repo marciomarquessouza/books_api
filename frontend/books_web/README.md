@@ -1,3 +1,5 @@
+FRONT-END USING VUE.JS IN PROGRESS
+
 # books_web
 
 > A simple book management system which allow the final user to download an book or a specific chapter for one book.
