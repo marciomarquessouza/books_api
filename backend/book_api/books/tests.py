@@ -2,8 +2,11 @@
 
 from django.test import TestCase
 from rest_framework.test import APITestCase
-from .models import Chapter
+from .models import Book, Chapter
 from rest_framework.test import APIClient
+from django.contrib.auth.models import User
+from django.urls import reverse
+from rest_framework.authtoken.models import Token
 
 
 class ChapterModelTest(TestCase):
@@ -36,15 +39,34 @@ class ChapterModelTest(TestCase):
         self.assertIs(len(chapter.content_in_paragraph()), 0)
 
 
-class BookApiTests(APITestCase):
+class ChapterApiTests(APITestCase):
+    url = reverse("books:chapters")
 
-    def test_book_list(self):
+    def setUp(self):
+        self.username = "marcio.souza"
+        self.email = "marcio.souza@ziggy.com"
+        self.password = "stardust"
+        self.user = User.objects.create_user(self.username, self.email, self.password)
+        self.token = Token.objects.create(user=self.user)
+        self.api_authentication()
+
+    def api_authentication(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+
+    @staticmethod
+    def create_book(title, description, category, author):
         """
-        ensure we can create a book
+        Create a book to be used in chapter validation
         """
-        client = APIClient()
-        response = client.get('/book/')
-        self.assertEqual(response.status_code, 200)
+        return Book.objects.create(title=title, description=description, category=category, author=author)
+
+    def test_create_chapter(self):
+        """
+        ensure we can create a book chapter
+        """
+        self.create_book("Morrissey","Smiths", "80s", "Me")
+        response = self.client.post(self.url, {"title": "Apice", "content": "All world", "book": 1 })
+        self.assertEqual(201, response.status_code)
 
     def test_chapter_list(self):
         """
